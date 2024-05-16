@@ -6,10 +6,10 @@ boolean-calculator-client/.pnp
 .pnp.js
 
 # testing
-boolean-calculator-client/coverage
+boolean-calculator-client/coverage/
 
 # production
-boolean-calculator-client/build
+boolean-calculator-client/build/
 
 # misc
 .DS_Store
