@@ -2,14 +2,14 @@
 
 # dependencies
 node_modules/
-/.pnp
+boolean-calculator-client/.pnp
 .pnp.js
 
 # testing
-/coverage
+boolean-calculator-client/coverage
 
 # production
-/build
+boolean-calculator-client/build
 
 # misc
 .DS_Store
