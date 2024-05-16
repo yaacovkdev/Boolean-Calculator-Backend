@@ -1,32 +1,68 @@
 $boolean-black: #535353;
 $boolean-blue: rgb(77, 119, 255);
 $boolean-green: #5fad63;
+$boolean-red: #eb2c2c;
 
 .submit-form {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-direction: column;
+  height: 100vh;
 
-  &__input {
+  &__input{
+    width: 60%;
+    //margin: 7rem auto;
+    position: relative;
+  }
+  
+  &__input-field {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    height: 60vh;
+
+    font-size: 3rem;
     width: 100%;
+    height: fit-content;
+    border: 3px solid $boolean-green;
+    border-radius: 1rem;
+    background-color: white;
+
     #boolean-input-field {
-      font-size: 4rem;
+      font-size: 1em;
       color: $boolean-black;
-      width: max(20rem, 60%);
-      border-radius: 0.25rem;
-      border: 2px solid $boolean-green;
+      width: 100%;
+      border: none;
+      padding: 1rem;
+      border-radius: 1rem;
+      background-color: transparent;
 
       &:focus {
-        border: 2px solid rgb(77, 119, 255);
-        border-radius: 0.5rem;
         outline: none !important;
       }
     }
+
+    #boolean-input-button {
+      font-size: 1em;
+      background-color: transparent;
+      border: none;
+      padding: 1rem;
+      border-radius: 0 0.7rem 0.7rem 0;
+
+      &:active {
+        background-color: $boolean-green;
+        color: whitesmoke;
+      }
+    }
+  }
+
+  #text-tag{
+    position: absolute;
+    right: -5rem;
+    top: 2.5rem;
+    z-index: -1;  
+    rotate: -30deg;
+    color: $boolean-red;
   }
 }
