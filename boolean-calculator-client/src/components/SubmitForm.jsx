@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import axios from "axios";
 import "./SubmitForm.scss";
 
 function SubmitForm(props) {
@@ -6,6 +7,23 @@ function SubmitForm(props) {
 
   const submitFormula = async () => {
     //post the formula to the api
+    let config = {
+      headers: {
+        "Content-Type": "text/plain",
+      },
+      responseType: "text",
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080",
+        inputFormula.current.value,
+        config
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
