@@ -1,9 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import "./SubmitForm.scss";
+import GenerateTable from "./GenerateTable";
 
 function SubmitForm(props) {
   const inputFormula = useRef();
+
+  const [tabledata, setTabledata] = useState(null);
 
   const submitFormula = async () => {
     //post the formula to the api
@@ -14,15 +17,21 @@ function SubmitForm(props) {
       responseType: "text",
     };
 
+    let raw_data = null;
+
     try {
       const response = await axios.post(
-        "http://localhost:8080",
+        "http://localhost:8080/stuff",
         inputFormula.current.value,
         config
       );
-      console.log(response);
+
+      raw_data = response.data;
+      
+      setTabledata(JSON.parse(raw_data));
     } catch (err) {
       console.error(err);
+      setTabledata(JSON.stringify(raw_data));
     }
   };
 
@@ -42,7 +51,9 @@ function SubmitForm(props) {
         <p id="text-tag">Finally Here!</p>
       </div>
 
-      <div className="submit-form__output"></div>
+      <div className="submit-form__output">
+        <GenerateTable data={tabledata}/>
+      </div>
     </div>
   );
 }

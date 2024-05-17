@@ -1,16 +1,20 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const BooleanCalculator = require('../bcp-source/BooleanCalculator').default;
 
 const app = express();
 app.use(express.text());
+app.use(express.json());
 app.use(cors());
 
-app.post('/', (req, res) => {
+// app.use('/', express.static(path.join(__dirname, '/build')));
+
+app.post('/stuff', (req, res) => {
   console.log(req.body);
 
-  //console.log(BooleanCalculator.main("p"));
   const calculation = BooleanCalculator(req.body);
+  
   res.status(200).send(calculation);
 });
 

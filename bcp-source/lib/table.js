@@ -2,15 +2,15 @@ const algebra = require('./algebra');
 
 function optionsMaker(M){
 
-    var divider = Math.pow(2,M.length);
+    let divider = Math.pow(2,M.length);
     
-    var c = 0;
-    var logic = true;
-    for(var i = 0; i < M.length; i++){
+    let c = 0;
+    let logic = true;
+    for(let i = 0; i < M.length; i++){
         divider /= 2;
         c = 0;
         logic = true;
-        for(var j = 1; j < M[i].length; j++){
+        for(let j = 1; j < M[i].length; j++){
             if(c == divider){
                 c = 0;
                 logic = !logic;
@@ -22,43 +22,43 @@ function optionsMaker(M){
     return M;
 }
 
-function initLogic(vars){
-    for(var i = 0; i < vars.length; i++){
-        for(var j = 0; j < Math.pow(2,vars.length); j++){
+function initLogic(lets){
+    for(let i = 0; i < lets.length; i++){
+        for(let j = 0; j < Math.pow(2,lets.length); j++){
             
-            vars[i].push([]);
+            lets[i].push([]);
         }
 
     }
     
-    vars = optionsMaker(vars);
-    return vars;
+    lets = optionsMaker(lets);
+    return lets;
 }
 
 function separateIntoUniqueInputs(stackInp){
-    var vars = [];
-    var isIn = false;
-    for(var i = 0; i < stackInp.length; i++){
+    let lets = [];
+    let isIn = false;
+    for(let i = 0; i < stackInp.length; i++){
         isIn = false;
-        for(var j = 0; j < vars.length; j++){
-            if(vars[j][0] == stackInp[i]){
+        for(let j = 0; j < lets.length; j++){
+            if(lets[j][0] == stackInp[i]){
                 isIn = true;
                 break;
             }
         }
         if(algebra.operator_priority.includes(stackInp[i]) || checkLiterals(stackInp[i]) || isIn) continue;
-        vars.push([stackInp[i]]);
+        lets.push([stackInp[i]]);
     }
-    return vars;
+    return lets;
 }
 
-//calculation for a single condition of variables
+//calculation for a single condition of letiables
 function getResult(Notation){
-    var Stack = [];
-    var n;
-    var solution;
+    let Stack = [];
+    let n;
+    let solution;
     
-    for(var i = 0; i < Notation.length; i++){
+    for(let i = 0; i < Notation.length; i++){
         if(Notation.length == 1){
             return Notation[i];
         }
@@ -90,19 +90,19 @@ function mergeVector(Vec, Main){
 }
 
 function stackVal(Matrix, Notation, Row){
-    var LiteralStack = [...Notation];
+    let LiteralStack = [...Notation];
 
     //literals mode
     if(Row == 0){
-        for(var i = 0; i < Notation.length; i++){
+        for(let i = 0; i < Notation.length; i++){
             if(Notation[i] == "TRUE") LiteralStack[i] = true;
             else if(Notation[i] == "FALSE") LiteralStack[i] = false;
         }
     }
     
     //normal mode
-    for(var i = 0; i < Notation.length; i++){
-        for(var j = 0; j < Matrix.length; j++){
+    for(let i = 0; i < Notation.length; i++){
+        for(let j = 0; j < Matrix.length; j++){
             if(Notation[i] == Matrix[j][0]){
                 LiteralStack[i] = Matrix[j][Row];
                 break;
@@ -121,8 +121,8 @@ function stackVal(Matrix, Notation, Row){
 }
 
 function generateAllResults(Matrix,Stack){
-    var ResultVector = ["Results"];
-    var LiteralStack;
+    let ResultVector = ["Results"];
+    let LiteralStack;
 
     //if we use only literals
     if(Matrix.length == 0){
@@ -131,8 +131,8 @@ function generateAllResults(Matrix,Stack){
         return ResultVector;
     }
 
-    //until the amount of values of the variable table
-    for(var i = 1; i < Matrix[0].length; i++){
+    //until the amount of values of the letiable table
+    for(let i = 1; i < Matrix[0].length; i++){
         LiteralStack = stackVal(Matrix,Stack,i);
         ResultVector.push(getResult(LiteralStack));
     }
@@ -142,15 +142,15 @@ function generateAllResults(Matrix,Stack){
 
 function createTable(stackInput){
     
-    var varArray = separateIntoUniqueInputs(stackInput);
+    let letArray = separateIntoUniqueInputs(stackInput);
     
-    varArray = initLogic(varArray);
+    letArray = initLogic(letArray);
     
-    var ResultVec = generateAllResults(varArray, stackInput);
+    let ResultVec = generateAllResults(letArray, stackInput);
 
-    mergeVector(ResultVec, varArray);
+    mergeVector(ResultVec, letArray);
     
-    return varArray;    
+    return letArray;    
 }
 
 module.exports = {

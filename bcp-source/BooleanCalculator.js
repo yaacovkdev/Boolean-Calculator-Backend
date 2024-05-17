@@ -6,9 +6,6 @@ const display = require(path + "displayconsole.js");
 const nameoperator = require(path + "nameoperator.js");
 
 const main = (main_input) => {
-  //main_input = "p EXCLUSIVE OR TRUE";
-
-  //console.log("hello", process.argv[2]);
 
   main_input = nameoperator.convertToProperNotation(main_input);
   if (main_input[0] == "^") {

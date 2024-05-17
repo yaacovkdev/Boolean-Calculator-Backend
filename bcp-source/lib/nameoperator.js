@@ -9,8 +9,8 @@ const XOR = ["XOR", "EXCLSOR", "EXCLUSIVE OR"];
 const BANNEDWORDS = ["error", "result"];
 
 function convertToProperNotation(input){
-    var curlybrace = false;
-    for(var pos = 0; pos < input.length; pos++){
+    let curlybrace = false;
+    for(let pos = 0; pos < input.length; pos++){
         if(!curlybrace && input[pos] == '{'){
             curlybrace = true;
             continue;
@@ -23,12 +23,12 @@ function convertToProperNotation(input){
         }
 
 
-        var AllNames = [];
+        let AllNames = [];
         AllNames.push(NOT,AND,OR,XOR);
 
-        var k;
-        for(var i = 0; i < AllNames.length; i++){
-            for(var j of AllNames[i]){
+        let k;
+        for(let i = 0; i < AllNames.length; i++){
+            for(let j of AllNames[i]){
                 k = 0;
                 for(k; k < j.length; k++){
                     
