@@ -33,8 +33,6 @@ const main = (main_input) => {
 
   let data_table = table.createTable(data_stack);
   return data_table;
-  //console.log(display.displayVariableMatrix(data_table));
-  //return display.displayVariableMatrix(data_table);
 };
 
 module.exports = {

@@ -20,4 +20,4 @@ app.post('/stuff', (req, res) => {
 
 app.listen(8080, function() {
   console.log("App started");
-})
+});

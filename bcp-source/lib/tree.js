@@ -1,6 +1,9 @@
 const algebra = require("./algebra.js");
 const util = require("./util.js");
 
+//This needs to be gone!
+let ErrorThrowingRecursion_traverseCreateTree = false;
+
 //Makes an array of 2 values that make up positions of the parenthesis in the equation
 function parenthesisLengths(input) {
   let B = [];
@@ -116,12 +119,12 @@ function inputToTree(formula, orderArray) {
 
   root = traverseCreateTree(root);
   if (ErrorThrowingRecursion_traverseCreateTree) {
+    ErrorThrowingRecursion_traverseCreateTree = false;
     return "Error: Incorrect Format of Input";
   }
   return root;
 }
 
-let ErrorThrowingRecursion_traverseCreateTree = false;
 //works, however an iterative solution can always be made
 function traverseCreateTree(Root) {
   if (Root == null || Root.data.final == true) {
