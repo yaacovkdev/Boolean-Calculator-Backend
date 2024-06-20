@@ -6,7 +6,8 @@ cases:
 3 XOR (Could be omitted)
 */
 
-const operator_priority = "!*+@";
+//const operator_priority = "!*+@";
+const operator_priority = ['!', '*', '+', '@'];
 
 function checkBoolInput(input){
     if(input == true || input == false){

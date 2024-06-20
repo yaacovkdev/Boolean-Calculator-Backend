@@ -13,7 +13,7 @@ function clearWhiteSpaces(string){
 }
 
 function presentableFormat(input){
-    for(var i = 0; i < input.length; i++)
+    for(let i = 0; i < input.length; i++)
     {
         if(input[i] == ' ' || input[i] == '_'){
             input = input.replaceAt(i,'_');
@@ -29,8 +29,8 @@ function presentableFormat(input){
 }
 
 function trimExtraSpaces(input){
-    var newstr = "";
-    var i = 0;
+    let newstr = "";
+    let i = 0;
     while(input[i] == '_'){ i++;}
     
     for(i; i < input.length; i++){
@@ -44,7 +44,7 @@ function trimExtraSpaces(input){
 
 
 function checkValidVariable(input){
-    for(var i = 0; i< input.length; i++){
+    for(let i = 0; i< input.length; i++){
         if(!(input.charCodeAt(i) >= 97 && input.charCodeAt(i) <= 122) 
         && !(input.charCodeAt(i) >= 65 && input.charCodeAt(i) <= 90)){
             return false;
@@ -60,14 +60,6 @@ function claerExtras(input){
 
     return input;
 }
-
-module.exports = {
-    Leaf,
-    claerExtras,
-    clearWhiteSpaces,
-    presentableFormat,
-    checkValidVariable
-};
 
 String.prototype.replaceAt = function(index, replacement) {
     if(replacement == ""){
@@ -86,3 +78,10 @@ String.prototype.replaceAtSub = function(index_at, index_until, replacement) {
     return this.substr(0, index_at) + replacement + this.substr(index_until + replacement.length-1);
 }
 
+module.exports = {
+    Leaf,
+    claerExtras,
+    clearWhiteSpaces,
+    presentableFormat,
+    checkValidVariable
+};
