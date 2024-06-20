@@ -5,9 +5,6 @@ node_modules/
 boolean-calculator-client/.pnp
 .pnp.js
 
-# client separate
-boolean-calculator-client
-
 # production
 build/
 
