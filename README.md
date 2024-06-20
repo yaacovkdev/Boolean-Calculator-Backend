@@ -9,10 +9,11 @@ After some time of learning Web development I decided to put my forgotten projec
 1. Make sure you have node v22+ and npm installed
 
 2. Open the terminal in the project root:
+```
+npm install
 
-   npm install
-   npm start
-
+npm start
+```
 3. Connect to React App
 
 ## Usage:
