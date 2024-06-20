@@ -24,8 +24,6 @@ const main = (main_input) => {
     return data_tree;
   }
 
-  console.log(data_tree);
-
   let data_stack = stack.createStack(data_tree);
   if (typeof data_stack == "string") {
     return data_stack;
