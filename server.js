@@ -26,7 +26,7 @@ app.ws("/", function (ws, req) {
       );
     } else if (typeof calculation === "string") {
       ws.send(
-        JSON.stringify({ status: 406, message: `Error: ${calculation}` })
+        JSON.stringify({ status: 406, message: `${calculation}` })
       );
     } else {
       ws.send(JSON.stringify({ status: 200, data: calculation }));
