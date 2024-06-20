@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const BooleanCalculator = require(path.join(
   __dirname,
-  "../bcp-source/BooleanCalculator"
+  "./bcp-source/BooleanCalculator"
 )).default;
 
 const app = express();
