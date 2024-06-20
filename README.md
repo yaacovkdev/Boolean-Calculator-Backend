@@ -10,11 +10,7 @@ After some time of learning Web development I decided to put my forgotten projec
 
 2. Open the terminal in the project root:
 
-   cd boolean-calculator-api
    npm install
-   npm start
-   cd ../boolean-calculator-client
-   npm install 
    npm start
 
 3. Connect to React App
