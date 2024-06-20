@@ -1,3 +1,4 @@
+const { parseArgs } = require("util");
 const algebra = require("./algebra.js");
 const util = require("./util.js");
 
@@ -105,8 +106,6 @@ function inputToTree(formula, orderArray) {
     return null;
   }
 
-  let n = orderArray.length - 1;
-
   //structure to be used for parsing the full formula
   const big_data = {
     formula: formula,
@@ -120,7 +119,7 @@ function inputToTree(formula, orderArray) {
   root = traverseCreateTree(root);
   if (ErrorThrowingRecursion_traverseCreateTree) {
     ErrorThrowingRecursion_traverseCreateTree = false;
-    return "Error: Incorrect Format of Input";
+    return "Error: Incorrect Format";
   }
   return root;
 }
@@ -145,6 +144,11 @@ function traverseCreateTree(Root) {
 function makeIntoNode(data) {
   if (data.order.length == 0) {
     data.formula = util.presentableFormat(data.formula);
+
+    if(data.formula.length === 0) {
+      return "";
+    }
+
     data.final = true;
 
     return new util.Leaf(data);
@@ -213,7 +217,7 @@ function makeIntoNode(data) {
     }
     if (l_data.formula.length == 0) node.left = null;
     else {
-      return "E";
+      return "";
     }
   } else {
     node.left = new util.Leaf(l_data);

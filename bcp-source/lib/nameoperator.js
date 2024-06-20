@@ -1,12 +1,9 @@
-const util = require("./util.js");
 const algebra = require("./algebra.js");
 
 const NOT = ["NOT", "~", "'", "¬"];
 const AND = ["AND", "^", "."];
 const OR = ["OR", "V"];
 const XOR = ["XOR", "EXCLSOR", "EXCLUSIVE OR"];
-
-const BANNEDWORDS = ["error", "result"];
 
 function convertToProperNotation(input){
     let curlybrace = false;
@@ -48,7 +45,6 @@ function convertToProperNotation(input){
     }
     
     if(curlybrace){
-        
         //Cheap solution to the problem of having a display of proper errors
         return "^Error: Curly Braces Not Closed";
     }

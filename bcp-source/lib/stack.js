@@ -26,7 +26,7 @@ function createStack(Root) {
       Root = Root.right;
     } else {
       if (!checkValidOperatorNode(Root)) {
-        return "Error: Incorrect Format of Input";
+        return "Error: Incorrect Format";
       }
       stack.push(Root.data.formula);
       Root = null;

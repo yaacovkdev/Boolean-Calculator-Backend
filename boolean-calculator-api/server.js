@@ -1,23 +1,35 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-const BooleanCalculator = require("../bcp-source/BooleanCalculator").default;
+const BooleanCalculator = require(path.join(
+  __dirname,
+  "../bcp-source/BooleanCalculator"
+)).default;
 
 const app = express();
+require("express-ws")(app);
+
 app.use(express.text());
 app.use(express.json());
 app.use(cors());
 
-// app.use('/', express.static(path.join(__dirname, '/build')));
+app.ws("/", function (ws, req) {
+  ws.on("message", function (msg) {
+    const data = JSON.parse(msg);
+    const calculation = BooleanCalculator(data);
 
-app.post("/stuff", (req, res) => {
-  const calculation = BooleanCalculator(req.body);
-  // console.log(calculation);
-  if(calculation.length > 16 && typeof calculation != "string"){
-    res.status(400).send('way too large!');
-  } else {
-    res.status(200).send(calculation);
-  }
+    if (calculation.length > 12 && typeof calculation != "string") {
+      ws.send(
+        JSON.stringify({ status: 400, message: "Calculated Data Too Large!" })
+      );
+    } else if (typeof calculation === "string") {
+      ws.send(
+        JSON.stringify({ status: 406, message: `Error: ${calculation}` })
+      );
+    } else {
+      ws.send(JSON.stringify({ status: 200, data: calculation }));
+    }
+  });
 });
 
 app.listen(8080, function () {

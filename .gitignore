@@ -5,9 +5,6 @@ node_modules/
 boolean-calculator-client/.pnp
 .pnp.js
 
-# testing
-boolean-calculator-client/coverage/
-
 # production
 build/
 

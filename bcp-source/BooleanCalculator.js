@@ -2,11 +2,9 @@ const path = "./lib/";
 const tree = require(path + "tree.js");
 const stack = require(path + "stack.js");
 const table = require(path + "table.js");
-const display = require(path + "displayconsole.js");
 const nameoperator = require(path + "nameoperator.js");
 
 const main = (main_input) => {
-
   main_input = nameoperator.convertToProperNotation(main_input);
   if (main_input[0] == "^") {
     return main_input.substr(1);
@@ -25,6 +23,8 @@ const main = (main_input) => {
   if (typeof data_tree == "string") {
     return data_tree;
   }
+
+  console.log(data_tree);
 
   let data_stack = stack.createStack(data_tree);
   if (typeof data_stack == "string") {
