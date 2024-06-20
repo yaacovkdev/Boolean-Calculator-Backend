@@ -1,12 +1,14 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 const BooleanCalculator = require(path.join(
   __dirname,
   "../bcp-source/BooleanCalculator"
 )).default;
 
 const app = express();
+const PORT = process.env.PORT || 8080;
 require("express-ws")(app);
 
 app.use(express.text());
@@ -32,6 +34,6 @@ app.ws("/", function (ws, req) {
   });
 });
 
-app.listen(8080, function () {
-  console.log("App started");
+app.listen(PORT, function () {
+  console.log("App started on PORT:", PORT);
 });
