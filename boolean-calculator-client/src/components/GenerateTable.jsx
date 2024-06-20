@@ -1,11 +1,13 @@
+import "./GenerateTable.scss"
+
 function GenerateTable({ data }) {
   console.log(data);
   if (data === null) return;
 
-  const [t, f] = ['1', '0'];
+  const [t, f] = ['T', 'F'];
   let thid = 0;
   const form_head = (
-    <thead>
+    <thead className="row-green">
       <tr key={`1`}>
         {data.map((col) => (
           <th key={`1-${++thid}`}>{col[0]}</th>

@@ -1,37 +1,48 @@
-import { useRef, useState } from "react";
-import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import "./SubmitForm.scss";
 import GenerateTable from "./GenerateTable";
 
-function SubmitForm(props) {
+function SubmitForm() {
   const inputFormula = useRef();
+  const [tableData, setTableData] = useState(null);
+  const ws = useRef(null);
 
-  const [tabledata, setTabledata] = useState(null);
+  useEffect(() => {
+    ws.current = new WebSocket("ws://localhost:8080");
 
-  const submitFormula = async () => {
-    //post the formula to the api
-    let config = {
-      headers: {
-        "Content-Type": "text/plain",
-      },
-      responseType: "text",
+    ws.current.onopen = () => {
+      console.log("WebSocket connection to Calculator established");
     };
 
-    let raw_data = null;
+    ws.current.onmessage = (event) => {
+      const response = JSON.parse(event.data);
+      console.log(response.status);
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/stuff",
-        inputFormula.current.value,
-        config
-      );
+      if (response.status === 400) {
+        console.log("Error:", response.message);
+      } else if (response.status === 200) {
+        if (response.data[0] === "Error") {
+          console.log("Error:", response.data[1]);
+        } else {
+          setTableData(response.data);
+        }
+      }
+    };
 
-      raw_data = response.data;
-      
-      setTabledata(JSON.parse(raw_data));
-    } catch (err) {
-      console.error(err);
-      setTabledata(JSON.stringify(raw_data));
+    ws.current.onclose = () => {
+      console.log("WebSocket connection to Calculator closed");
+    };
+
+    return () => {
+      ws.current.close();
+    };
+  }, []);
+
+  const submitFormula = () => {
+    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+      ws.current.send(JSON.stringify(inputFormula.current.value));
+    } else {
+      console.error('WebSocket connection error');
     }
   };
 
@@ -45,14 +56,14 @@ function SubmitForm(props) {
             ref={inputFormula}
           />
           <button id="boolean-input-button" onClick={submitFormula}>
-            Post
+            Solve
           </button>
         </div>
         <p id="text-tag">Finally Here!</p>
       </div>
 
       <div className="submit-form__output">
-        <GenerateTable data={tabledata}/>
+        <GenerateTable data={tableData} />
       </div>
     </div>
   );

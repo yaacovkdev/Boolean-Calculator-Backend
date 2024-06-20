@@ -120,7 +120,7 @@ function inputToTree(formula, orderArray) {
   root = traverseCreateTree(root);
   if (ErrorThrowingRecursion_traverseCreateTree) {
     ErrorThrowingRecursion_traverseCreateTree = false;
-    return "Error: Incorrect Format of Input";
+    return "Error: Incorrect Format";
   }
   return root;
 }
