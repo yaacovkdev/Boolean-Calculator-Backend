@@ -20,7 +20,7 @@ app.ws("/", function (ws, req) {
     const data = JSON.parse(msg);
     const calculation = BooleanCalculator(data);
 
-    if (calculation.length > 12 && typeof calculation != "string") {
+    if (calculation.length > 16 && typeof calculation != "string") {
       ws.send(
         JSON.stringify({ status: 400, message: "Calculated Data Too Large!" })
       );
